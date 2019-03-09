@@ -1,5 +1,7 @@
 # Simple CSV Upload Form for batch processing images with remove-bg
 
+![Screenshot](demo.gif)
+
 ## Install
 
 clone the repository

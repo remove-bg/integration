@@ -27,7 +27,7 @@ if (isset($_POST['upload'])) {
         $f = fopen($csvFilename, 'r');
         while ( ($data = fgetcsv($f, 4096 , $delimiter) ) !== false) {
             $url = $data[$urlColIndex];
-            $newFileName = pathinfo( $url, PATHINFO_FILENAME) . ".png";
+            $newFileName = pathinfo( parse_url($url, PHP_URL_PATH), PATHINFO_FILENAME) . ".png";
             if ($newFileName == '') {
                 $newFileName = uniqid('',false).'.png';
             }
@@ -76,7 +76,7 @@ if (isset($_POST['upload'])) {
                     if (count($resultData)) {
                         echo '<h2>Results</h2>';
                         foreach ($resultData as $org => $file) {
-                            echo '<p><a href="'.$org.'" target="_blank">Original</a> -> <a href="'.$results.$file.'" target="_blank">Result</a></p>';
+                            echo '<p><a href="'.$org.'" target="_blank">Original</a> &raquo; <a href="'.$results.$file.'" target="_blank">Result</a></p>';
                         }
                     }
                 ?>
