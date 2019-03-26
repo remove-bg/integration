@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a1y-WG-WaN">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Choose:-->
+        <scene sceneID="Yx9-FM-VDk">
+            <objects>
+                <viewController id="vmS-DK-UX7" customClass="SelectorViewController" customModule="remove_bg" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Tt-8F-eHH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="j0K-nm-Diy">
+                                <rect key="frame" x="146" y="268.5" width="83" height="130"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf1-rZ-jJb">
+                                        <rect key="frame" x="0.0" y="0.0" width="83" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="LdY-jH-3LR"/>
+                                        </constraints>
+                                        <state key="normal" title="Objective-C"/>
+                                        <connections>
+                                            <segue destination="9FL-0W-Cao" kind="show" id="Ljz-6X-aNB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="br1-b5-VbY">
+                                        <rect key="frame" x="0.0" y="80" width="83" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="VjC-7r-gcC"/>
+                                        </constraints>
+                                        <state key="normal" title="Swift"/>
+                                        <connections>
+                                            <segue destination="MuQ-ec-3ej" kind="show" id="p0L-IC-Zfm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="j0K-nm-Diy" firstAttribute="centerY" secondItem="0Tt-8F-eHH" secondAttribute="centerY" id="8zL-KZ-2ah"/>
+                            <constraint firstItem="j0K-nm-Diy" firstAttribute="centerX" secondItem="0Tt-8F-eHH" secondAttribute="centerX" id="9UQ-xv-D9Q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="v82-do-M8l"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Choose:" id="eZ2-FV-9Aw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tBm-ym-vfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="s2B-pV-hIw">
+            <objects>
+                <navigationController id="a1y-WG-WaN" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4Zq-A9-lMl">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vmS-DK-UX7" kind="relationship" relationship="rootViewController" id="DKe-2s-Rtx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o2S-CW-bbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-986" y="375"/>
+        </scene>
+        <!--Swift-->
+        <scene sceneID="mvb-bD-HNk">
+            <objects>
+                <viewController title="Swift" id="MuQ-ec-3ej" customClass="SwiftViewController" customModule="remove_bg" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZAv-EG-kuO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iak-XJ-hga">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="keM-zr-j6x" firstAttribute="trailing" secondItem="Iak-XJ-hga" secondAttribute="trailing" id="0wc-Fw-TKn"/>
+                            <constraint firstItem="Iak-XJ-hga" firstAttribute="leading" secondItem="keM-zr-j6x" secondAttribute="leading" id="7oc-vj-pXp"/>
+                            <constraint firstItem="Iak-XJ-hga" firstAttribute="top" secondItem="keM-zr-j6x" secondAttribute="top" id="FsI-D5-rEg"/>
+                            <constraint firstItem="keM-zr-j6x" firstAttribute="bottom" secondItem="Iak-XJ-hga" secondAttribute="bottom" id="Tgg-2r-KDo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="keM-zr-j6x"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Iak-XJ-hga" id="eEO-rn-xZj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mW0-W0-RLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1215" y="-60"/>
+        </scene>
+        <!--Objective-C-->
+        <scene sceneID="CcG-je-fXP">
+            <objects>
+                <viewController title="Objective-C" id="9FL-0W-Cao" customClass="ObjectiveCViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Vs-lU-vEP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-h5-SN2">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mJ8-h5-SN2" firstAttribute="leading" secondItem="PP7-nJ-pyK" secondAttribute="leading" id="4zI-tZ-zff"/>
+                            <constraint firstAttribute="bottom" secondItem="mJ8-h5-SN2" secondAttribute="bottom" id="h5s-XO-d74"/>
+                            <constraint firstItem="mJ8-h5-SN2" firstAttribute="trailing" secondItem="PP7-nJ-pyK" secondAttribute="trailing" id="ldk-e6-hXY"/>
+                            <constraint firstItem="mJ8-h5-SN2" firstAttribute="top" secondItem="PP7-nJ-pyK" secondAttribute="top" id="nIc-or-pqG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PP7-nJ-pyK"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="mJ8-h5-SN2" id="bWv-j5-W0h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rrc-5I-1re" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1214" y="662"/>
+        </scene>
+    </scenes>
+</document>

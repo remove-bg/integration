@@ -1,0 +1,6 @@
+framework module Pods_remove_bgTests {
+  umbrella header "Pods-remove-bgTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,14 @@
+platform :ios, '11.0'
+
+target 'remove-bg' do
+  use_frameworks!
+
+  pod 'Alamofire', '4.8.1'
+  pod 'AFNetworking', '3.2.1'
+
+  target 'remove-bgTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
