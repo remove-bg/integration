@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+mkdir -p ./output
+
+find ./input -type f -iname '*.jpg' -o -iname '*.png' | while read -r input_file; do
+  echo "Processing $input_file"
+  output_file_name=$(echo "$input_file" | sed s/input/output/ | sed s/jpg$/png/)
+
+  curl --silent --show-error \
+       --header "X-API-Key: $REMOVE_BG_API_KEY" \
+       --form "image_file=@$input_file" \
+       --fail 'https://api.remove.bg/v1.0/removebg' \
+       | convert -fill white -opaque none - "$output_file_name"
+
+  echo "Processed $input_file -> $output_file_name"
+done
