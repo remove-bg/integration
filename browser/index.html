@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Remove BG Browser example</title>
+  <title>remove.bg browser demo</title>
   <link rel="stylesheet" href="https://unpkg.com/marx-css/css/marx.min.css">
 </head>
 <body>
@@ -32,14 +32,21 @@
 
     <hr>
 
-    <h2>Result</h2>
-
     <div id="output"></div>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" type="text/javascript"></script>
   <script type="text/javascript">
-    processImage = function(apiKey, data) {
+    displayResult = function(imageB64) {
+      var image = document.createElement("img");
+      image.src = "data:image/png;base64," + imageB64;
+
+      var output = document.getElementById("output");
+      output.innerHTML = "";
+      output.appendChild(image);
+    }
+
+    processImage = function(data) {
       data.append("size", "regular");
 
       var request = {
@@ -47,7 +54,7 @@
         headers: {
           "Content-Type": "multipart/form-data",
           "Accept": "application/json",
-          "X-API-Key": apiKey
+          "X-API-Key": data.get("api_key")
         },
         data: data,
         url: "https://api.remove.bg/v1.0/removebg",
@@ -55,12 +62,7 @@
 
       axios(request)
         .then(function (result) {
-          var image = document.createElement("img");
-          image.src = "data:image/png;base64," + result.data.data.result_b64;
-
-          var output = document.getElementById("output");
-          output.innerHTML = "";
-          output.appendChild(image);
+          displayResult(result.data.data.result_b64);
         })
         .catch(function (error) {
           console.log(error);
@@ -71,15 +73,14 @@
     document.getElementById("form").onsubmit = function(event) {
       event.preventDefault();
 
-      var formData = new FormData(this);
-      var apiKey = formData.get("api_key");
-      var imageUrl = formData.get("image_url");
-      var imageFile = formData.get("image_file");
+      var data = new FormData(this);
+      var imageUrl = data.get("image_url");
+      var imageFile = data.get("image_file");
 
       if (imageUrl === "" && imageFile.size === 0) {
         alert("Please specify an image URL or file");
       } else {
-        processImage(apiKey, formData);
+        processImage(data);
       }
     };
   </script>
