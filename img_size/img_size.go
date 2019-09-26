@@ -13,7 +13,8 @@ import (
 )
 
 func main() {
-	paths := findImagePaths()
+	globPattern := fetchGlobPattern()
+	paths := findImagePaths(globPattern)
 	imageMetadatas := collectMetadata(paths)
 	buckets := countIntoBuckets(imageMetadatas)
 
@@ -23,12 +24,22 @@ func main() {
 	}
 }
 
-func findImagePaths() []string {
-	paths, err := doublestar.Glob("./**/*.{jpg,JPG,jpeg,JPEG,png,PNG}")
+func fetchGlobPattern() string {
+	if len(os.Args) > 1 {
+		return os.Args[1]
+	}
+
+	return "./**/*.{jpg,JPG,jpeg,JPEG,png,PNG}"
+}
+
+func findImagePaths(globPattern string) []string {
+	paths, err := doublestar.Glob(globPattern)
 
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Printf("Pattern: '%s' matched %d images\n\n", globPattern, len(paths))
 
 	return paths
 }
