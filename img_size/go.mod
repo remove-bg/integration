@@ -1,4 +1,4 @@
-module github.com/remove-bg/integration
+module github.com/remove-bg/img_size
 
 go 1.13
 

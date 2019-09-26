@@ -24,3 +24,7 @@ img_size '**/*.jpg' # Only JPGs
 
 This program uses [Go modules](https://github.com/golang/go/wiki/Modules) to
 manage dependencies, and allow development outside the `$GOPATH`.
+
+### Build
+
+Run `./bin/build` to build for Linux, Mac and Windows.
