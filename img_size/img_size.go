@@ -5,9 +5,12 @@ import (
 	"image"
 	_ "image/jpeg"
 	_ "image/png"
+	"io/ioutil"
 	"log"
 	"math"
 	"os"
+	"path"
+	"path/filepath"
 
 	"github.com/bmatcuk/doublestar"
 )
@@ -17,11 +20,8 @@ func main() {
 	paths := findImagePaths(globPattern)
 	imageMetadatas := collectMetadata(paths)
 	buckets := countIntoBuckets(imageMetadatas)
-
-	fmt.Println("\nResolution: Count\n-----------------")
-	for _, bucket := range buckets {
-		fmt.Println(bucket.Description())
-	}
+	report := generateReport(buckets)
+	outputReport(report)
 }
 
 func fetchGlobPattern() string {
@@ -29,17 +29,25 @@ func fetchGlobPattern() string {
 		return os.Args[1]
 	}
 
-	return "./**/*.{jpg,JPG,jpeg,JPEG,png,PNG}"
+	defaultPattern := "**/*.{jpg,JPG,jpeg,JPEG,png,PNG}"
+	return path.Join(executableDir(), defaultPattern)
+}
+
+func executableDir() string {
+	executablePath, _ := os.Executable()
+	return filepath.Dir(executablePath)
 }
 
 func findImagePaths(globPattern string) []string {
+	fmt.Printf("Searching %s\n", globPattern)
+
 	paths, err := doublestar.Glob(globPattern)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Pattern: '%s' matched %d files\n\n", globPattern, len(paths))
+	fmt.Printf("Matched %d files\n\n", len(paths))
 
 	return paths
 }
@@ -83,6 +91,21 @@ func countIntoBuckets(imageMetadatas []imageMetadata) []*bucket {
 	}
 
 	return buckets
+}
+
+func generateReport(buckets []*bucket) string {
+	result := "\nResolution: Count\n-----------------\n"
+
+	for _, bucket := range buckets {
+		result += bucket.Description() + "\n"
+	}
+
+	return result
+}
+
+func outputReport(report string) {
+	reportPath := path.Join(executableDir(), "./image_sizes.txt")
+	ioutil.WriteFile(reportPath, []byte(report), 0644)
 }
 
 func createBuckets() []*bucket {
