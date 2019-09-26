@@ -11,4 +11,4 @@ printf "Building MacOS...\n"
 GOOS=darwin go build -o "dist/macos/img_size" $PACKAGE
 
 printf "Building Windows...\n"
-GOOS=windows go build -o "dist/img_size.exe" $PACKAGE
+GOOS=windows go build -o "dist/windows/img_size.exe" $PACKAGE
