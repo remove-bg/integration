@@ -39,7 +39,7 @@ func executableDir() string {
 }
 
 func findImagePaths(globPattern string) []string {
-	fmt.Printf("Searching %s\n", globPattern)
+	fmt.Printf("Searching %s\r\n", globPattern)
 
 	paths, err := doublestar.Glob(globPattern)
 
@@ -47,7 +47,7 @@ func findImagePaths(globPattern string) []string {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Matched %d files\n\n", len(paths))
+	fmt.Printf("Matched %d files\r\n\r\n", len(paths))
 
 	return paths
 }
@@ -70,7 +70,7 @@ func calculateImageMegapixels(path string) float64 {
 	config, _, err := image.DecodeConfig(file)
 
 	if err != nil {
-		fmt.Printf("%s: %s\n", path, err)
+		fmt.Printf("%s: %s\r\n", path, err)
 		return -1
 	}
 
@@ -94,10 +94,22 @@ func countIntoBuckets(imageMetadatas []imageMetadata) []*bucket {
 }
 
 func generateReport(buckets []*bucket) string {
-	result := "\nResolution: Count\n-----------------\n"
+	result := "Resolution: Count (%)\r\n-----------------\r\n"
+	totalImages := 0
 
 	for _, bucket := range buckets {
-		result += bucket.Description() + "\n"
+		totalImages += bucket.count
+	}
+
+	for _, bucket := range buckets {
+		percentage := (float64(bucket.count) / float64(totalImages)) * 100
+		result += fmt.Sprintf(
+			"%.2f-%.2f:\t%d (%.2f%%)\r\n",
+			bucket.start,
+			bucket.end,
+			bucket.count,
+			percentage,
+		)
 	}
 
 	return result
@@ -105,6 +117,7 @@ func generateReport(buckets []*bucket) string {
 
 func outputReport(report string) {
 	reportPath := path.Join(executableDir(), "./image_sizes.txt")
+	fmt.Printf("Writing report to %s\r\n", reportPath)
 	ioutil.WriteFile(reportPath, []byte(report), 0644)
 }
 
@@ -148,8 +161,4 @@ func (b bucket) Match(metadata imageMetadata) bool {
 
 func (b *bucket) Increment() {
 	b.count++
-}
-
-func (b bucket) Description() string {
-	return fmt.Sprintf("%.2f-%.2f:\t%d", b.start, b.end, b.count)
 }
