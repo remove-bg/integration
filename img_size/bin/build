@@ -2,20 +2,13 @@
 
 set -euo pipefail
 
-SANDBOX=$(mktemp -d)
 PACKAGE=github.com/remove-bg/img_size
 
 printf "Building Linux...\n"
-GOOS=linux go build -o "$SANDBOX/img_size-linux" $PACKAGE
+GOOS=linux go build -o "dist/linux/img_size" $PACKAGE
 
 printf "Building MacOS...\n"
-GOOS=darwin go build -o "$SANDBOX/img_size-macos" $PACKAGE
+GOOS=darwin go build -o "dist/macos/img_size" $PACKAGE
 
 printf "Building Windows...\n"
-GOOS=windows go build -o "$SANDBOX/img_size.exe" $PACKAGE
-
-printf "\nBuild summary:\n"
-find "$SANDBOX" -type f -exec file {} \;
-
-printf "\nBinaries are located here:\n$SANDBOX\n"
-open "$SANDBOX"
+GOOS=windows go build -o "dist/img_size.exe" $PACKAGE

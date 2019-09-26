@@ -18,6 +18,12 @@ img_size '**/*.png' # Only PNGs
 img_size '**/*.jpg' # Only JPGs
 ```
 
+## Download
+
+* [Windows](https://github.com/remove-bg/integration/raw/master/img_size/dist/windows/img_size.exe)
+* [MacOS](https://github.com/remove-bg/integration/raw/master/img_size/dist/macos/img_size)
+* [Linux](https://github.com/remove-bg/integration/raw/master/img_size/dist/linux/img_size)
+
 ## Development
 
 - Recommended: Go 1.13+
