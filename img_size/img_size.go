@@ -18,7 +18,7 @@ func main() {
 	imageMetadatas := collectMetadata(paths)
 	buckets := countIntoBuckets(imageMetadatas)
 
-	fmt.Println("Resolution: Count\n-----------------")
+	fmt.Println("\nResolution: Count\n-----------------")
 	for _, bucket := range buckets {
 		fmt.Println(bucket.Description())
 	}
@@ -39,7 +39,7 @@ func findImagePaths(globPattern string) []string {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Pattern: '%s' matched %d images\n\n", globPattern, len(paths))
+	fmt.Printf("Pattern: '%s' matched %d files\n\n", globPattern, len(paths))
 
 	return paths
 }
@@ -59,7 +59,13 @@ func calculateImageMegapixels(path string) float64 {
 	file, _ := os.Open(path)
 	defer file.Close()
 
-	config, _, _ := image.DecodeConfig(file)
+	config, _, err := image.DecodeConfig(file)
+
+	if err != nil {
+		fmt.Printf("%s: %s\n", path, err)
+		return -1
+	}
+
 	return float64(config.Width*config.Height) / oneMillion
 }
 
