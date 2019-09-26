@@ -14,8 +14,8 @@ import (
 
 func main() {
 	paths := findImagePaths()
-	pathsMegapixels := calculateImageSizes(paths)
-	buckets := countIntoBuckets(pathsMegapixels)
+	imageMetadatas := collectMetadata(paths)
+	buckets := countIntoBuckets(imageMetadatas)
 
 	fmt.Println("Resolution: Count\n-----------------")
 	for _, bucket := range buckets {
@@ -33,17 +33,18 @@ func findImagePaths() []string {
 	return paths
 }
 
-func calculateImageSizes(paths []string) map[string]float64 {
-	result := make(map[string]float64, len(paths))
+func collectMetadata(paths []string) []imageMetadata {
+	results := make([]imageMetadata, len(paths))
 
 	for _, path := range paths {
-		result[path] = calculateImageSize(path)
+		megapixels := calculateImageMegapixels(path)
+		results = append(results, imageMetadata{path, megapixels})
 	}
 
-	return result
+	return results
 }
 
-func calculateImageSize(path string) float64 {
+func calculateImageMegapixels(path string) float64 {
 	file, _ := os.Open(path)
 	defer file.Close()
 
@@ -53,12 +54,12 @@ func calculateImageSize(path string) float64 {
 
 const oneMillion = 1000000.0
 
-func countIntoBuckets(pathsMegapixels map[string]float64) []*bucket {
+func countIntoBuckets(imageMetadatas []imageMetadata) []*bucket {
 	buckets := createBuckets()
 
-	for _, megapixels := range pathsMegapixels {
+	for _, metadata := range imageMetadatas {
 		for _, bucket := range buckets {
-			if bucket.Match(megapixels) {
+			if bucket.Match(metadata) {
 				bucket.Increment()
 			}
 		}
@@ -90,14 +91,19 @@ func createBuckets() []*bucket {
 	}
 }
 
+type imageMetadata struct {
+	path       string
+	megapixels float64
+}
+
 type bucket struct {
 	start float64
 	end   float64
 	count int
 }
 
-func (b bucket) Match(value float64) bool {
-	return value > b.start && value <= b.end
+func (b bucket) Match(metadata imageMetadata) bool {
+	return metadata.megapixels > b.start && metadata.megapixels <= b.end
 }
 
 func (b *bucket) Increment() {
