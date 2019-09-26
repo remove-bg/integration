@@ -39,7 +39,7 @@ func executableDir() string {
 }
 
 func findImagePaths(globPattern string) []string {
-	fmt.Printf("Searching %s\n", globPattern)
+	fmt.Printf("Searching %s\r\n", globPattern)
 
 	paths, err := doublestar.Glob(globPattern)
 
@@ -47,7 +47,7 @@ func findImagePaths(globPattern string) []string {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Matched %d files\n\n", len(paths))
+	fmt.Printf("Matched %d files\r\n\r\n", len(paths))
 
 	return paths
 }
@@ -70,7 +70,7 @@ func calculateImageMegapixels(path string) float64 {
 	config, _, err := image.DecodeConfig(file)
 
 	if err != nil {
-		fmt.Printf("%s: %s\n", path, err)
+		fmt.Printf("%s: %s\r\n", path, err)
 		return -1
 	}
 
@@ -94,10 +94,10 @@ func countIntoBuckets(imageMetadatas []imageMetadata) []*bucket {
 }
 
 func generateReport(buckets []*bucket) string {
-	result := "\nResolution: Count\n-----------------\n"
+	result := "\r\nResolution: Count\r\n-----------------\r\n"
 
 	for _, bucket := range buckets {
-		result += bucket.Description() + "\n"
+		result += bucket.Description() + "\r\n"
 	}
 
 	return result
