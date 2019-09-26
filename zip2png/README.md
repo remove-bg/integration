@@ -10,9 +10,9 @@ Usage: zip2png <zipfile>
 
 ## Download
 
-* [Windows](dist/windows/zip2png.exe)
-* [MacOS](dist/macos/zip2png)
-* [Linux](dist/linux/zip2png)
+* [Windows](https://github.com/remove-bg/integration/raw/master/zip2png/dist/windows/zip2png.exe)
+* [MacOS](https://github.com/remove-bg/integration/raw/master/zip2png/dist/macos/zip2png)
+* [Linux](https://github.com/remove-bg/integration/raw/master/zip2png/dist/linux/zip2png)
 
 ## Source Code
 
