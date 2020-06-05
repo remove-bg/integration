@@ -17,3 +17,12 @@ Usage: zip2png <zipfile>
 ## Source Code
 
 It's all in [zip2png.go](zip2png.go).
+
+## Update - June 2020
+
+This feature is now integrated in the [remove.bg CLI](https://github.com/remove-bg/go).
+After installation enter the following in your terminal for further details:
+
+```
+removebg zip2png --help
+```
